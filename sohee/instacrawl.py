@@ -132,20 +132,17 @@ class InstagramAPI:
         shortcode = resp.text.split('"shortcode":"')
         #print(len(shortcode))
         for i in range(1,len(shortcode)):
-            try:
-                print('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
-                resp = self.s.get('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
-                #print(resp.text)
-                url = 'https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/'+resp.text.split('https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/')[1].split('"')[0].replace('\\u0026','&')
-                #print(url)
-                if url in imageurl: 
-                    pass
-                else:
-                    self.download(url,'https://www.instagram.com/p/'+shortcode[i].split('"')[0])
-                    imageurl.append(url)
-                    shorturl.append('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
-            except:
+            print('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
+            resp = self.s.get('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
+            #print(resp.text)
+            url = 'https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/'+resp.text.split('https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/')[1].split('"')[0].replace('\\u0026','&')
+            #print(url)
+            if url in imageurl: 
                 pass
+            else:
+                self.download(url,'https://www.instagram.com/p/'+shortcode[i].split('"')[0])
+                imageurl.append(url)
+                shorturl.append('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
 
 
 
