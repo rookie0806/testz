@@ -237,7 +237,7 @@ class Container extends Component {
 
     componentWillReceiveProps = nextProps => {
       const { data } = this.props;
-      if ( nextProps.data) {	
+      if ( nextProps.data && nextProps.text) {	
           this.draw(nextProps.data,nextProps.text);
       }
     };

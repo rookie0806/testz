@@ -136,7 +136,7 @@ class InstagramAPI:
                 #print('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
                 resp = self.s.get('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
                 url = 'https://scontent'+resp.text.split('"graphql":{"shortcode_media":')[1].split('https://scontent')[1].split('"')[0].replace('\\u0026','&')
-                #print(url)
+                print(url)
                 if url in imageurl: 
                     pass
                 else:
