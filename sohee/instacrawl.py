@@ -134,7 +134,7 @@ class InstagramAPI:
         for i in range(1,len(shortcode)):
             print('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
             resp = self.s.get('https://www.instagram.com/p/'+shortcode[i].split('"')[0])
-            #print(resp.text)
+            print(resp.text)
             url = 'https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/'+resp.text.split('https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/')[1].split('"')[0].replace('\\u0026','&')
             #print(url)
             if url in imageurl: 
