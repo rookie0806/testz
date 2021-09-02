@@ -321,6 +321,6 @@ class InstagramAPI:
 if __name__ == "__main__":
     InstagramAPI = InstagramAPI("k.d0nghwi", "dj0806!")
     InstagramAPI.login() # login
-    InstagramAPI.getFeed("happyheeday")
+    InstagramAPI.getFeed("ddo.rong_2")
 
     
