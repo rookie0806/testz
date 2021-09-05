@@ -75,7 +75,6 @@ class Container extends Component {
                       firstx = imagearray[0][0]*scale;
                       firsty = imagearray[0][1]*scale;
                   }
-                 console.log(imagearray,"Zxczxczx");
                   ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
                   function makeRandom(min, max){
                       var RandVal = Math.floor(Math.random()*(max-min+1)) + min;
@@ -230,8 +229,8 @@ class Container extends Component {
     componentWillReceiveProps = nextProps => {
       const { data } = this.props;
       if ( nextProps.data && nextProps.xy) {	
-          console.log(nextProps.data,"dd");
-          console.log(nextProps.xy,"xx");
+          //console.log(nextProps.data,"dd");
+          //console.log(nextProps.xy,"xx");
           this.draw(nextProps.data,nextProps.xy);
       }
     };

@@ -28,7 +28,7 @@ class Container extends Component {
               image[i] = new Image()
               image[i].src = data[i]["image"]
           }
-          console.log(image);
+          //console.log(image);
           var timerId = "";
 
             var first = true;
@@ -145,7 +145,7 @@ class Container extends Component {
                               }           
                           }
                         }
-                        console.log(List);
+                        //console.log(List);
                         postXY(List);
                         first = false;
                       }
@@ -160,7 +160,7 @@ class Container extends Component {
       const { data } = this.props;
       const {postXY} = this.props;
       if ( nextProps.data && nextProps.text) {	
-          console.log(nextProps.data);
+          //console.log(nextProps.data);
           this.draw(nextProps.data,nextProps.text);
       }
     };

@@ -75,10 +75,7 @@ function getXY(){
 }
 function postXY(data) {
   var csrftoken = getCookie('csrftoken');
-  console.log(csrftoken);
-  console.log(JSON.stringify({
-    data
-  }) );
+  //console.log(csrftoken);
   return (dispatch, getState) => {
 
     fetch(`/crawl/setsoheeXY/`, {
@@ -97,9 +94,7 @@ function postXY(data) {
         return response.json();
       })
       .then(json => {
-        if (json.message) {
-          console.log(json.message)
-        }
+        return
       });
   };
 }
