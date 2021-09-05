@@ -1,5 +1,6 @@
 const SET_DATA = "SET_DATA";
 const SET_TEXT = "SET_TEXT";
+const SET_XY = "SET_XY";
 function setDATA(data) {
   return {
     type: SET_DATA,
@@ -10,6 +11,12 @@ function setTEXT(text) {
   return {
     type: SET_TEXT,
     text
+  };
+}
+function setXY(xy) {
+  return {
+    type: SET_XY,
+    xy
   };
 }
 // API Actions
@@ -41,6 +48,61 @@ function getTEXT() {
       .catch(err => console.log(err));
   };
 }
+function getCookie(cookieName){
+  var cookieValue=null;
+  if(document.cookie){
+      var array=document.cookie.split((escape(cookieName)+'='));
+      if(array.length >= 2){
+          var arraySub=array[1].split(';');
+          cookieValue=unescape(arraySub[0]);
+      }
+  }
+  return cookieValue;
+}
+function getXY(){
+  return (dispatch, getState) => {
+    fetch("/crawl/getXY/", {
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        
+        dispatch(setXY(json));
+      })
+      .catch(err => console.log(err));
+  };
+}
+function postXY(data) {
+  var csrftoken = getCookie('csrftoken');
+  console.log(csrftoken);
+  console.log(JSON.stringify({
+    data
+  }) );
+  return (dispatch, getState) => {
+
+    fetch(`/crawl/setsoheeXY/`, {
+      method: "POST",
+      headers: {
+        'X-CSRFTOKEN': csrftoken,
+        'Content-Type': 'application/json; charset=UTF-8',
+        
+      },
+      body: JSON.stringify(
+        data
+      )
+      
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json.message) {
+          console.log(json.message)
+        }
+      });
+  };
+}
 // Initial State
 
 const initialState = {};
@@ -53,6 +115,8 @@ function reducer(state = initialState, action) {
       return applySetDATA(state, action);
     case SET_TEXT:
         return applySetTEXT(state, action);
+    case SET_XY:
+      return applySetXY(state, action)
     default:
       return state;
   }
@@ -73,9 +137,18 @@ function applySetTEXT(state, action) {
     text
   };
 }
+function applySetXY(state, action) {
+  const { xy } = action;
+  return {
+    ...state,
+    xy
+  };
+}
 const actionCreators = {
   getDATA,
-  getTEXT
+  getXY,
+  getTEXT,
+  postXY,
 };
 
 export { actionCreators };

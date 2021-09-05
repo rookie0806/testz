@@ -13,20 +13,20 @@ class Container extends Component {
   };
   static propTypes = {
     data: PropTypes.array,
-    text : PropTypes.object,
-    getText: PropTypes.func.isRequired,
+    xy :  PropTypes.array,
+    getXY : PropTypes.func.isRequired,
     getData: PropTypes.func.isRequired,
   };
   
-  draw(data,text) {
-    var canvas = document.getElementsByTagName('canvas')[0];
+  draw(data,xy) {
+          var canvas = document.getElementsByTagName('canvas')[0];
           canvas.width = document.body.clientWidth ; canvas.height = window.innerHeight;
           var image = new Array()
           for (var i = 0; i < data.length; i++) {
               image[i] = new Image()
               image[i].src = data[i]["image"]
           }
-
+          console.log(image);
           var timerId = "";
 
             var first = true;
@@ -58,20 +58,12 @@ class Container extends Component {
             // ctx.clearRect(0,0,canvas.width,canvas.height);
             // ctx.restore();
                   if(first){
-                      ctx.font= '70px Calibri';
-                      ctx.fillText(text.text,0,70,1000);
-      
-                      for(var i=0;i<1000;i++){
-                          for(var j=0;j<1000;j++){
-                              if(ctx.getImageData(i,j,1,1).data[3]==255){
-                                  //console.log(i,j);
-                                  imagearray.push([i,j]);
-                                  maxarray_x.push(i);
-                                  maxarray_y.push(j);
-                                  var randompick = makeRandom(1,data.length-1);
-                                  randomimage.push(randompick);
-                              }           
-                          }
+                      for(var i=0;i<xy.length;i++){
+                            imagearray.push([xy[i].x,xy[i].y]);
+                            maxarray_x.push(xy[i].x);
+                            maxarray_y.push(xy[i].y);
+                            var randompick = makeRandom(0,data.length-1);
+                            randomimage.push(randompick);        
                       }
                       var max_x = Math.max.apply(null,maxarray_x);
                       var max_y = Math.max.apply(null,maxarray_y);
@@ -83,7 +75,7 @@ class Container extends Component {
                       firstx = imagearray[0][0]*scale;
                       firsty = imagearray[0][1]*scale;
                   }
-                 
+                 console.log(imagearray,"Zxczxczx");
                   ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
                   function makeRandom(min, max){
                       var RandVal = Math.floor(Math.random()*(max-min+1)) + min;
@@ -237,15 +229,17 @@ class Container extends Component {
 
     componentWillReceiveProps = nextProps => {
       const { data } = this.props;
-      if ( nextProps.data && nextProps.text) {	
-          this.draw(nextProps.data,nextProps.text);
+      if ( nextProps.data && nextProps.xy) {	
+          console.log(nextProps.data,"dd");
+          console.log(nextProps.xy,"xx");
+          this.draw(nextProps.data,nextProps.xy);
       }
     };
   
 
   componentDidMount() {
-    const { getData,getText } = this.props;
-    getText();
+    const { getData,getXY } = this.props;
+    getXY();
     getData();
     //console.log(this.props);
     
