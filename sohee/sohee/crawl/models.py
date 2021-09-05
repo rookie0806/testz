@@ -13,3 +13,7 @@ class Data(models.Model):
 
 class Text(models.Model):
     text = models.CharField(max_length=15)
+
+class XY(models.Model):
+    x = models.IntegerField(default=0)
+    y = models.IntegerField(default=0)

@@ -15,3 +15,11 @@ class TextSerializer(serializers.ModelSerializer):
         fields = (
             'text',
         )
+
+class XYSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.XY
+        fields = (
+            "x",
+            "y",
+        )

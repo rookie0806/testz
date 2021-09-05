@@ -24,4 +24,15 @@ class TextAdmin(admin.ModelAdmin):
     list_display = (
         'text',
     )
+@admin.register(models.XY)
+class XYAdmin(admin.ModelAdmin):
+    search_fields = (
+        'x',
+        'y',
+    )
+
+    list_display = (
+        'x',
+        'y'
+    )
 
